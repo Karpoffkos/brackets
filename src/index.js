@@ -1,3 +1,5 @@
+const common = require("mocha/lib/interfaces/common");
+
 /* 
 Implement function check(str, bracketsConfig), that for given brackets sequence will return true if it is correct and false otherwise
 
@@ -32,44 +34,43 @@ module.exports = function check(str, bracketsConfig) {
     "||" : "||",
     "()" : "()"
   }
-let arrBreakets = ["{}","[]","||","()"];
-
-
-  //function closeBrakets (str) {// функция ищет в строке первую попавшиеся совпадение (в нашем случае закрытые скобки), после чего удалает их из строки, после чего ищет снова. если не находит
-    if (str.length%2 == 0){
-      let newStr = "";
-      let checkConditionArr = 0;
-      for( key in closeBracketsObj){
-        let n = str.indexOf(closeBracketsObj[key]);
-        checkConditionArr += + n;
-       //console.log(checkConditionArr,45)
+let arrBreakets = bracketsConfig.map (i => i.join('')); //console.log(arrBreakets, arrBreakets.length, 37);
+//console.log(str, bracketsConfig, 38)
+// str = "()[](())(())"
+let newStr = ""; 
+let booleanCLoseBrakets;
+  function closeBrakets (str38) {// функция ищет в строке первую попавшиеся совпадение (в нашем случае закрытые скобки), после чего удалает их из строки, после чего ищет снова. если не находит
+    if (str38.length%2 == 0){ 
+      let checkConditionStr = 0;
+      for( let f = 0; f <  arrBreakets.length; f++){
+        let n = str38.indexOf(arrBreakets[f]); // console.log(arrBreakets[f], 46);
+        checkConditionStr += + n;       //console.log(checkConditionStr,47)
         if(n > -1) {
-          newStr= str.slice(0, n) + str.slice(n+2);
-        //  console.log(newStr,48)
-          if (newStr.length>1) {
+          f = arrBreakets.length;
+          newStr= str38.slice(0, n) + str38.slice(n+2);        //console.log(newStr, newStr.length , 50);
+          if (newStr.length > 1) {
+           // console.log(newStr.length > 1, 52)
             closeBrakets(newStr)
-          } else {
-        //   console.log(true,52)
-            return true;
+          } else  {
+       //     console.log(true,55)
+            return booleanCLoseBrakets = true;
           }
-        } else if (checkConditionArr == (-4)){
-         // console.log(false,56)
-          return false;
+        } else if (checkConditionStr == (-(arrBreakets.length))){
+     //     console.log(false,59)
+          return booleanCLoseBrakets = false;
         }
       }
-      
-
     }else {
-    //  console.log(false, 59)
-      return false
+   //  console.log(false, 64)
+      return booleanCLoseBrakets = false;
     }
-  //} 
+  } 
 
-  //closeBrakets(str)
-  
+closeBrakets(str)
+ //console.log(booleanCLoseBrakets, 70)  
 
 
-  /* function checkStr (str1) {  //проверка при симметричноси строки со скобками ([ ])
+  function checkStr (str1) {  //проверка при симметричноси строки со скобками ([ ])
       let secondPart1 = "";
 
       for (j = 0; j <str1.length/2; j++){  
@@ -90,11 +91,11 @@ let arrBreakets = ["{}","[]","||","()"];
         return true; // в случае совпадения возвращает true ;
 
       }
-  } */
+  }
 
 
 
- /*  function checkPair (str2) {//проверка при несимметричноси. скобки для условие true должны иметь посдедовательность например ()[]{}, т.е проверяем пару за парой  
+  function checkPair (str2) {//проверка при несимметричноси. скобки для условие true должны иметь посдедовательность например ()[]{}, т.е проверяем пару за парой  
       for (i = 0; i <str2.length; i+=2){  
         let pair = str2.slice(i, i+2); // ДЛЯ ЭТОГО ПЕРЕБИРАЕМ ПО ДВА СИМВОЛА
         //console.log(pair, i,  59)
@@ -103,9 +104,9 @@ let arrBreakets = ["{}","[]","||","()"];
           return false; // 
         } else {return true}; 
       }
-  } */
+  }
 
-  /* function checkArry(bracketsConfig1) {
+  function checkArry(bracketsConfig1) {
     for (let a = 0; a < bracketsConfig1.length; a++){
       let arrStrMake = bracketsConfig1[a].join('');
       //console.log(arrStrMake, 68)
@@ -114,17 +115,19 @@ let arrBreakets = ["{}","[]","||","()"];
         return false; // 
       } else {return true}; 
     }
-  } */
+  }
   
 
 
- /*  if(closeBrakets(str) ){
-   console.log(true, 122); 
+  if(booleanCLoseBrakets){
+  // console.log(true, 122); 
     return true
   } else {
-   console.log(false, 125)
+  // console.log(false, 125)
     return false;
-  } */
+  } 
   
 }
-//check("((()))()", [['(', ')'], ['[', ']']])
+
+//check("156156", [['(', ')'], ['[', ']']])
+5125757346
