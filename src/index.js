@@ -26,54 +26,50 @@ module.exports = function check(str, bracketsConfig) {
     "|" : "|",
     "(" : ")"
   }
-  let closeBrackets = {
+  let closeBracketsObj = {
     "{}" : "{}",
     "[]" : "[]",
     "||" : "||",
     "()" : "()"
   }
+let arrBreakets = ["{}","[]","||","()"];
 
-  function findCloseBrakets (str) {
-    if (str%2 == 0){
-      for (key in closeBrackets){
-        str.indexOf('Widget')
-    
+
+  //function closeBrakets (str) {// функция ищет в строке первую попавшиеся совпадение (в нашем случае закрытые скобки), после чего удалает их из строки, после чего ищет снова. если не находит
+    if (str.length%2 == 0){
+      let newStr = "";
+      let checkConditionArr = 0;
+      for( key in closeBracketsObj){
+        let n = str.indexOf(closeBracketsObj[key]);
+        checkConditionArr += + n;
+       //console.log(checkConditionArr,45)
+        if(n > -1) {
+          newStr= str.slice(0, n) + str.slice(n+2);
+        //  console.log(newStr,48)
+          if (newStr.length>1) {
+            closeBrakets(newStr)
+          } else {
+        //   console.log(true,52)
+            return true;
+          }
+        } else if (checkConditionArr == (-4)){
+         // console.log(false,56)
+          return false;
+        }
       }
+      
 
-    } else {
+    }else {
+    //  console.log(false, 59)
       return false
     }
-  }
+  //} 
+
+  //closeBrakets(str)
+  
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  function checkStr (str1) {  //проверка при симметричноси
+  /* function checkStr (str1) {  //проверка при симметричноси строки со скобками ([ ])
       let secondPart1 = "";
 
       for (j = 0; j <str1.length/2; j++){  
@@ -94,11 +90,11 @@ module.exports = function check(str, bracketsConfig) {
         return true; // в случае совпадения возвращает true ;
 
       }
-  }
+  } */
 
 
 
-  function checkPair (str2) {//проверка при несимметричноси. скобки для условие true должны иметь посдедовательность например ()[]{}, т.е проверяем пару за парой  
+ /*  function checkPair (str2) {//проверка при несимметричноси. скобки для условие true должны иметь посдедовательность например ()[]{}, т.е проверяем пару за парой  
       for (i = 0; i <str2.length; i+=2){  
         let pair = str2.slice(i, i+2); // ДЛЯ ЭТОГО ПЕРЕБИРАЕМ ПО ДВА СИМВОЛА
         //console.log(pair, i,  59)
@@ -107,9 +103,9 @@ module.exports = function check(str, bracketsConfig) {
           return false; // 
         } else {return true}; 
       }
-  }
+  } */
 
-  function checkArry(bracketsConfig1) {
+  /* function checkArry(bracketsConfig1) {
     for (let a = 0; a < bracketsConfig1.length; a++){
       let arrStrMake = bracketsConfig1[a].join('');
       //console.log(arrStrMake, 68)
@@ -118,17 +114,17 @@ module.exports = function check(str, bracketsConfig) {
         return false; // 
       } else {return true}; 
     }
-  }
+  } */
   
 
 
-  if((checkPair(str)||checkStr(str))&&checkArry(bracketsConfig)){
-    console.log(true, 70); 
+ /*  if(closeBrakets(str) ){
+   console.log(true, 122); 
     return true
   } else {
-    console.log(false, 73)
+   console.log(false, 125)
     return false;
-  }
+  } */
   
 }
-//check("((()))", [['(', ')'], ['[', ']']])
+//check("((()))()", [['(', ')'], ['[', ']']])
